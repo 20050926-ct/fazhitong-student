@@ -185,7 +185,7 @@ export default function ToolboxAndCampus() {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div className="bg-white border border-outline-variant rounded-2xl overflow-hidden group shadow-sm hover:border-primary transition-all">
             <div className="h-40 overflow-hidden relative">
-              <img alt="Campus" className="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzAKzXwpgkX1khszDQqtOwN1OUwhslIn1i-99PCAAXIX_PXe5C0GDx8g0-WK2rhO8_MKYH_H_x8qFnmWCreSCt4kYH5zflaaO7hHuuPfnPgscolVdQy7Bjtd3WVVw8maXveaeteFwZ7K1w8MHRh304HrrJvQzaPSs3F2gRUnHSA6pfTvdgaTIWMNxHhYkp9WHFyKSpxYLIs9uvnKu4zHeLT_pmVpOGoXTksJi1igyLOd5Yz1ZVA2r4utwIX1F5NqKS_PWmcgeDb_Q7"/>
+              <div className="w-full h-full flex items-center justify-center text-[80px] bg-gradient-to-br from-primary/10 to-primary/5">🎓</div>
               <div className="absolute top-4 right-4 bg-primary px-3 py-1 rounded-full text-[10px] font-bold text-white">高发警惕</div>
             </div>
             <div className="p-6">
@@ -196,7 +196,7 @@ export default function ToolboxAndCampus() {
           </div>
           <div className="bg-white border border-outline-variant rounded-2xl overflow-hidden group shadow-sm hover:border-primary transition-all">
             <div className="h-40 overflow-hidden relative">
-              <img alt="Rent" className="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFYZSSf2m2IZYoyHFlmpiNxcbqdJQ-URbCb8SRm92cGAkf39rtZEMToIlw8Rzsyhixjg_jAOBgIYOdJQZ_7GfFdJIZI8reXyAnkMmXbYLSGF4uwCQH4Kmn9obc8lylCLtVOfyJV7HjeIQ_tuIue4Q_QDmzpzLNkoE-uqlN1oB9Ndfcmrt04g3OwLR5bLycd4JzVrI9mFCCMFPMUQIqvPZM2hhqS2NoZDCJ6wcs86wgRoibIDcGl24Nn6PEJzP6iXBFLNxc4YaPbu7F"/>
+              <div className="w-full h-full flex items-center justify-center text-[80px] bg-gradient-to-br from-secondary/10 to-secondary/5">🏠</div>
               <div className="absolute top-4 right-4 bg-primary/10 border border-primary/20 px-3 py-1 rounded-full text-[10px] font-bold text-primary">避坑案例</div>
             </div>
             <div className="p-6">
@@ -207,7 +207,7 @@ export default function ToolboxAndCampus() {
           </div>
           <div className="bg-white border border-outline-variant rounded-2xl overflow-hidden group shadow-sm hover:border-primary transition-all">
             <div className="h-40 overflow-hidden relative">
-              <img alt="Loan" className="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNPJsvlTndf_qtLUGuCW7y6Wmxz5OpfkoaSINJYYXhpDrXussxljVsh9Pe3rJdQ9dvoEXvO4o8WCk5NRknXyPdXNAlo2M4rr6PL8XaBAbtIu84Rox5MWozMfJ2bgKdWFg_GjeqM1vD8zzJrR_eZBkIXtAVHD8JwRQoV262ZPF1I_uo2m2IDYGzrFikcYsO5jhvxQXe_MxT2HlVYVMkh6ef7ELt_TZDfWFxLAkLBsFbwfWZZS309spsZ3JElWNvgN_EGZuMraVrewWP"/>
+              <div className="w-full h-full flex items-center justify-center text-[80px] bg-gradient-to-br from-error/10 to-error/5">💰</div>
               <div className="absolute top-4 right-4 bg-primary px-3 py-1 rounded-full text-[10px] font-bold text-white">风险告知</div>
             </div>
             <div className="p-6">
@@ -218,7 +218,7 @@ export default function ToolboxAndCampus() {
           </div>
           <div className="bg-white border border-outline-variant rounded-2xl overflow-hidden group shadow-sm hover:border-primary transition-all">
             <div className="h-40 overflow-hidden relative">
-              <img alt="Club" className="w-full h-full object-cover group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ-gjF1YF-DQaVstnCVJ1q9O98vksGHsfB325Uw0BbI7oYHVCy-eSJH2kXVHwbgPOcQAJwuW3olpFwdo2QeeDD6eqtzE_Z6_iNeePN-KbSxUYIrj2CRs9iQlXJ4pTvUhL776xm7cQb8j-TIBbhxFena_ad2nUnSK2ZGsGrqmiTfc87x_lH00jBq_bRBf_bB6DkXaprQcHzGnYYmB5OY7Xqk20g_wgHOaopjyeHKW6-nP-mbq6vflJsigE2a6HBuTfsncj2Q9HkCGN6"/>
+              <div className="w-full h-full flex items-center justify-center text-[80px] bg-gradient-to-br from-tertiary/10 to-tertiary/5">⚖️</div>
               <div className="absolute top-4 right-4 bg-surface-container-low border border-outline-variant px-3 py-1 rounded-full text-[10px] font-bold text-primary">社团必备</div>
             </div>
             <div className="p-6">
