@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: fazhitong-student
+    runtime: node
+    repo: https://github.com/your-github-username/fazhitong-student.git
+    branch: main
+    plan: free
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: ./node_modules/.bin/tsx server.ts
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      - key: GEMINI_API_KEY
+        sync: false
+    healthCheckPath: /api/legal-storage/summary
+    autoDeploy: yes

@@ -1,0 +1,193 @@
+﻿
+================================================================================
+          法智通 - 方案A：Render 免费永久部署   【5 步傻瓜操作手册】
+================================================================================
+
+  需要 30 分钟，只点鼠标、复制粘贴，不用写代码，不用装 Git。
+
+  流程概览：
+  【注册 GitHub  (5 分钟)】 → 【上传项目 (5 分钟)】 →
+  【注册 Render (1 分钟)】 → 【一键部署 (3-5 分钟等待)】 →
+  【获得永久网址 ✅】
+
+
+================================================================================
+  第 1 步（必须您自己做）：注册 GitHub 账号
+================================================================================
+
+  👉 打开：https://github.com/signup
+     （需要邮箱/手机号验证，所以必须您自己点）
+
+  填什么：
+    Username：随便，比如 fazhitong-team
+    Email：您的邮箱（QQ邮箱/163/Outlook 都行）
+    Password：您自己记好
+    人机验证：点我是机器人（reCAPTCHA）
+    最后去邮箱点 Verify email address 的链接
+
+  ✅ 注册完成后，保持登录状态。
+
+
+================================================================================
+  第 2 步：创建一个空仓库 + 上传项目文件夹（完全不用写命令）
+================================================================================
+
+  2.1 打开：https://github.com/new
+  2.2 填写：
+      Repository name:  fazhitong-student    （就填这个，别改）
+      Description:      法智通 - 在校大学生法治服务平台 学生端
+      选择 Public（公开，免费）
+      【不要】勾选 Initialize with README / .gitignore / License
+      点击 Create repository
+
+  2.3 页面跳转到 Quick setup，
+      点击 "...or upload an existing file"  （就在 Quick setup 标题下面）
+
+  2.4 把电脑上的这个文件夹拖进去：
+         C:\Users\yy\Desktop\学生端网站(源文件)
+      注意：不是拖压缩包，是拖文件夹本身！
+      会自动上传所有代码、图片、数据。
+
+      ⚠ 上传时可以跳过太大的文件（node_modules 超过 800MB）：
+         拖进去前先从文件夹里删掉 node_modules 文件夹！
+         （Render 会自动 npm ci 安装，不需要你传）
+
+  2.5 上传完成后，拉到最下面：
+      Commit changes:
+        Add files via upload
+      点  Commit changes  按钮
+
+  ✅ 完成！现在你有了 GitHub 仓库地址，例如：
+     https://github.com/你的用户名/fazhitong-student
+     把这个链接复制好，第 4 步要用。
+
+
+================================================================================
+  第 3 步（1 分钟）：注册 Render 账号
+================================================================================
+
+  👉 打开：https://dashboard.render.com/register
+
+  最简单：点右上角 【Sign up with GitHub】
+  → 自动跳转到 GitHub，点 "Authorize Render"
+  → 完成，无需再次填表。
+
+
+================================================================================
+  第 4 步（关键！5 分钟配置 + 自动构建）：一键部署
+================================================================================
+
+  方式 A（推荐，99% 用户选这个）：网页手动配置
+
+  4.1 登录 Render 后，右上角蓝色按钮 【New +】 → 选 【Web Service】
+
+  4.2 页面出现 "Connect a repository"，
+      如果你看不到 fazhitong-student 仓库，点 【Configure account】
+      → 选 【Only select repositories】 → 选 fazhitong-student → Install
+
+  4.3 点 fazhitong-student 右边的 【Connect】
+
+  4.4 填部署配置（照着下面抄）：
+
+    ┌───────────────────────────────────────────────────────────────┐
+    │  Name:           fazhitong          ← 随便填，影响最终网址     │
+    │  Runtime:        Node              ← 必须选 Node！            │
+    │  Region:         Singapore         ← 选新加坡，国内最快       │
+    │  Branch:         main              ← 默认就行                │
+    │                                                               │
+    │  Build Command:                                                │
+    │     npm ci && npm run build                                    │
+    │                                                               │
+    │  Start Command:                                                │
+    │     ./node_modules/.bin/tsx server.ts                         │
+    │                                                               │
+    │  Plan:           Free                    ← 选免费的           │
+    └───────────────────────────────────────────────────────────────┘
+
+  4.5 点下面的 【Advanced】按钮 → 点 【Add Environment Variable】
+      添加下面 3 行（Key / Value）：
+
+        Key:   NODE_ENV            Value:   production
+        Key:   PORT                Value:   3000
+        Key:   GEMINI_API_KEY      Value:   （留空也行，有 AI Key 就填）
+
+  4.6 拉到最下面，点 【Create Web Service】 按钮！
+
+
+================================================================================
+  第 5 步：等待构建完成 → 获得永久网址
+================================================================================
+
+  页面会显示 Build Logs 输出日志，大概 3~5 分钟：
+    - 出现 "Using Build cache" → 缓存成功
+    - 出现 "Running 'npm ci && npm run build'" → 开始构建
+    - 出现 "Build successful" → 构建成功 ✅
+    - 出现 "Starting service..." → 启动中
+    - 出现 "Your service is live" → 部署成功 🎉
+
+  页面左上角会出现绿色的 "Live" 标志，旁边就是你的永久网址：
+    🌐  https://fazhitong.onrender.com       ← 举个例子
+
+  ✅ 完成！现在这个网址：
+    - 任何人，任何电脑，任何手机，任何网络（4G/5G/Wi-Fi）
+    - 全球任何地方都能访问
+    - 永久免费（只要你的 GitHub 仓库还在）
+
+
+================================================================================
+  常见问题速查
+================================================================================
+
+  ❓ 构建失败，日志里出现 npm ERR! 怎么办？
+     → 检查 package.json 和 package-lock.json 是否都上传了（第 2.4 步）
+     → 点 "Manual Deploy" → "Clear build cache & deploy" 重试
+
+  ❓ 打开网址显示 "This service is sleeping"？
+     → Render 免费层 15 分钟没人访问会休眠，等 30 秒自动唤醒。
+     → 比赛/答辩前 2 分钟先自己打开一次，保证评委打开秒开。
+
+  ❓ 中文乱码 / 题库为空 / 文章列表空？
+     → 检查 data/*.json 是否都上传了（不要用旧的 .gitignore！）
+     → 重新 "Clear build cache & deploy" 一次。
+
+  ❓ 想换一个好看的域名（比如 fazhitong.com）？
+     → 在阿里云/腾讯云 30 元买个域名
+     → Render 后台点 "Custom Domains" → Add Custom Domain
+     → 按提示去域名后台添加 CNAME 解析，5 分钟生效。
+
+  ❓ AI 问答用不了？
+     → 登录 console.cloud.google.com 申请 Gemini API Key
+     → Render 后台 Environment 里添加 GEMINI_API_KEY，Save Changes 自动重启
+
+  ❓ Unity 3D 法庭进不去？
+     → 本地项目里先跑 npm run build:court-3d 生成 court-3d 到 dist
+     → 重新 Push 到 GitHub，Render 自动重新构建
+
+  ❓ 上传到 GitHub 时 node_modules 太大 / 上传失败？
+     → 千万不要上传 node_modules！删掉这个文件夹再传！
+     → 只有 package.json 和 package-lock.json 需要上传，
+        Render 会自动 npm ci 安装所有依赖。
+
+
+================================================================================
+  需要复制粘贴的内容汇总（怕你找不到，全列在这）
+================================================================================
+
+  Build Command:
+    npm ci && npm run build
+
+  Start Command:
+    ./node_modules/.bin/tsx server.ts
+
+  环境变量（Environment Variables）：
+    NODE_ENV      =  production
+    PORT          =  3000
+    GEMINI_API_KEY=  （可留空）
+
+  Render 推荐设置：
+    Region 选 Singapore（新加坡节点最快）
+    Plan    选 Free（免费）
+
+================================================================================
+  文档位置：学生端网站(源文件)/Render部署-5步傻瓜手册.txt
+================================================================================

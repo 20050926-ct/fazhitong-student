@@ -1,0 +1,36 @@
+{
+  "entities": {
+    "LegalArticle": {
+      "title": "Legal Article",
+      "description": "A legal article or video information scraped from the web.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The title of the article or video."
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The source URL."
+        },
+        "category": {
+          "type": "string",
+          "description": "The category (e.g., 微视频, 动漫, 漫画)."
+        },
+        "scrapedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the data was scraped."
+        }
+      },
+      "required": ["title", "url", "category", "scrapedAt"]
+    }
+  },
+  "firestore": {
+    "/legal_articles/{articleId}": {
+      "schema": "LegalArticle",
+      "description": "Collection of legal articles and videos."
+    }
+  }
+}

@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && 
+        (request.auth.token.email == "a20241008291@gmail.com" && request.auth.token.email_verified == true);
+    }
+
+    // ===============================================================
+    // Collection: legal_articles
+    // ===============================================================
+    match /legal_articles/{articleId} {
+      allow read: if true; // Public legal info
+      allow write: if isAdmin();
+    }
+
+    // ===============================================================
+    // Collection: users
+    // ===============================================================
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}

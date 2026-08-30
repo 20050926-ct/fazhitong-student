@@ -1,0 +1,13 @@
+# 用法：在项目根目录执行
+#   docker compose up -d --build
+# 可选：复制 .env.example 为 .env 并填写 GEMINI_API_KEY 后再启动
+services:
+  web:
+    build: .
+    ports:
+      - "${HOST_PORT:-3000}:3000"
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+    restart: unless-stopped

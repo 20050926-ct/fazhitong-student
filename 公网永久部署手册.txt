@@ -1,0 +1,167 @@
+﻿
+================================================================================
+           法智通 - 在校大学生法治服务平台   【永久公网部署手册】
+================================================================================
+
+  项目：学生端网站（React 19 + Vite + Express + Node.js）
+  适用：任何电脑、任何手机、任何网络都能打开（4G/5G/Wi-Fi 全球访问）
+
+================================================================================
+【方案 A】推荐：Render 免费一键部署（永久免费、无需服务器、无需域名）
+================================================================================
+
+  Render 是全球最大的 PaaS 平台之一，免费层完全够用，不用绑卡，
+  部署后给你一个永久的 https://xxx.onrender.com 网址，永不失效。
+
+  步骤：
+
+  1. 注册 GitHub 账号（免费，5 分钟）
+     https://github.com/signup
+
+  2. 把「学生端网站(源文件)」整个文件夹推送到 GitHub（可以用 GitHub Desktop）
+       - 打开 GitHub Desktop → File → Add local repository
+       - 选择学生端网站(源文件)文件夹 → Publish repository
+       - 勾选 "Keep this code private" 可选
+
+  3. 注册 Render 账号（免费，可用 GitHub 账号直接登录）
+     https://dashboard.render.com/register
+
+  4. 一键部署（两种方式任选一种）：
+
+     【方式一】最简单：点 Render 的 "New + Web Service"
+       - 登录 Render 后，右上角点 "New +" → 选 "Web Service"
+       - 选择你刚刚 Push 的 GitHub 仓库
+       - 配置页面按下面填：
+           Name:            fazhitong  (可以自己起)
+           Runtime:         Node
+           Region:          Singapore （离中国最近，速度最快）
+           Branch:          main
+           Build Command:   npm ci && npm run build
+           Start Command:   ./node_modules/.bin/tsx server.ts
+           Plan:            Free（免费）
+       - 点 "Advanced" → Add Environment Variables，添加：
+           Key: NODE_ENV     Value: production
+           Key: PORT         Value: 3000
+           Key: GEMINI_API_KEY   Value: （可选，你的 AI API Key）
+       - 点击 "Create Web Service"
+
+     【方式二】自动配置：用项目中 render.yaml
+       - 在 Render 页面点 "Blueprints" → New Blueprint Instance
+       - 选择仓库后它会自动读取 render.yaml，全部自动配置好
+
+  5. 等待 2~5 分钟构建完成 → 看到 "Live" 标志 → 获得永久公网地址：
+     例如：https://fazhitong.onrender.com
+
+  ✅ 完成！这个网址全球任何人都能访问，永久免费。
+     （免费层如果 15 分钟没人访问会休眠，下次打开会等待约 30 秒自动唤醒）
+
+
+================================================================================
+【方案 B】Vercel 部署（速度更快，但需把 API 改造成 Serverless）
+================================================================================
+
+  由于本项目需要完整 Express 后端（/api 很多路由），Vercel 原生仅支持
+  Serverless Functions，改造成本较高。建议优先方案 A（Render）。
+
+  如仍想使用：项目中的 vercel.json 可参考，把 apiRouter 拆成
+  /api/*.ts 独立文件，耗时约 1 天工作量。
+
+
+================================================================================
+【方案 C】阿里云 / 腾讯云 / 华为云 服务器部署（最稳、需花钱）
+================================================================================
+
+  适合比赛答辩、正式商用场景。推荐配置（约 30~100 元/月）：
+    - CPU：2 核
+    - 内存：2 GB 或以上
+    - 系统：Ubuntu 22.04 LTS
+    - 带宽：3 Mbps 以上
+
+  一键部署步骤（在服务器上执行）：
+
+    # 1. 安装 Docker + Docker Compose
+    curl -fsSL https://get.docker.com | sh
+
+    # 2. 上传整个项目文件夹到服务器（scp 或宝塔面板上传）
+    scp -r ./学生端网站(源文件) root@你的服务器IP:/opt/fazhitong
+
+    # 3. 启动
+    cd /opt/fazhitong
+    docker compose up -d --build
+
+    # 4. 浏览器访问
+    http://你的服务器IP:3000
+
+    # （可选）绑定域名 + HTTPS
+    # 用 Nginx + Let's Encrypt：
+    apt install -y nginx certbot python3-certbot-nginx
+    # 配置 /etc/nginx/sites-available/fazhitong.conf：
+    server {
+      listen 80; server_name 你的域名.com;
+      location / { proxy_pass http://127.0.0.1:3000;
+                   proxy_set_header Host \System.Management.Automation.Internal.Host.InternalHost;
+                   proxy_set_header X-Real-IP \; }
+    }
+    certbot --nginx -d 你的域名.com   # 自动 HTTPS
+
+  推荐：阿里云「云翼计划」学生机 9.9 元/月，腾讯云「云+校园」类似。
+
+
+================================================================================
+【方案 D】临时公网访问（马上能用，不保证永久稳定）
+================================================================================
+
+  就是现在正在使用的方式：Localtunnel / Cloudflare Quick Tunnel
+  免费、无需注册、马上能用，但 URL 每次会变，且不稳定。
+
+  我们给你写好脚本了，双击即可：
+    - 「一键启动（生产模式）.bat」
+    - 然后在另一个终端运行：npx localtunnel --port 3000
+    - 或下载 cloudflared 运行：cloudflared tunnel --url http://localhost:3000
+
+
+================================================================================
+【项目已经具备的部署配置】
+================================================================================
+
+   Dockerfile                 配置好了 → 任何支持 Docker 的平台通用
+   docker-compose.yml         配置好了 → 云服务器一条命令启动
+   render.yaml                配置好了 → Render 蓝图一键部署
+   .dockerignore              配置好了 → 避免 node_modules 等无用文件进镜像
+   package.json start 脚本    配置好了 → cross-env NODE_ENV=production tsx server.ts
+   DEPLOY.md                  详细说明 → 见项目目录
+
+
+================================================================================
+【常见问题】
+================================================================================
+
+  Q1: Render 免费版访问很慢？
+      → 把 Region 选 Singapore（新加坡），国内访问速度约 100~300ms 可接受。
+      → 或买一台香港/新加坡节点的云服务器（方案 C），速度最快。
+
+  Q2: AI 问答不能用？
+      → 在部署平台的环境变量里添加 GEMINI_API_KEY 即可。
+      → 如果用中国大陆服务器，Google API 被墙，需要换通义千问/文心一言。
+
+  Q3: Unity 3D 法庭场景加载不出来？
+      → WebGL 构建文件较大（约 100MB），未打包进 dist。
+      → 本地执行 npm run build:court-3d，再重新部署即可。
+
+  Q4: 数据存到哪里？会丢吗？
+      → 目前数据存在项目 data/*.json 文件里。
+      → Render 免费层不保证持久化磁盘，建议接入 Firebase / MongoDB。
+      → （项目已内置 Firebase 配置，只需填入环境变量即可启用）
+
+
+================================================================================
+  总结推荐：
+  ┌─────────────────────────────────────────────────────────────────┐
+  │  临时演示 → 方案 D（现在的 loca.lt 地址，立刻能用）              │
+  │  比赛/作业 → 方案 A（Render 免费部署，30 分钟搞定，永久网址）    │
+  │  正式商用 → 方案 C（云服务器 + 域名 + HTTPS）                   │
+  └─────────────────────────────────────────────────────────────────┘
+
+================================================================================
+            文档位置：学生端网站(源文件)/公网永久部署手册.txt
+================================================================================
