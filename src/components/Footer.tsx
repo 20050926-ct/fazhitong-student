@@ -1,11 +1,11 @@
-export default function Footer() {
+﻿export default function Footer() {
   return (
     <footer className="bg-white border-t border-outline-variant w-full py-16 px-12 flex flex-col items-center gap-8">
       <div className="flex flex-col md:flex-row justify-between w-full max-w-[1400px] gap-12">
         <div className="max-w-xs">
           <div className="text-2xl font-black text-primary mb-6 flex items-center gap-2">
             <div className="w-6 h-6 bg-primary rounded-sm"></div>
-            律境智联
+            法智通
           </div>
           <p className="font-body text-xs text-on-surface-variant leading-relaxed">
             我们致力于通过前沿的数字化体验与智能技术，让法律不再是晦涩的条文，而是每个人都能掌握的生存技能。在法治与科技的交汇处，构建正义的桥梁。
@@ -45,7 +45,7 @@ export default function Footer() {
           <a className="font-body text-xs text-on-surface-variant hover:text-primary transition-colors underline" href="#">法律声明</a>
           <a className="font-body text-xs text-on-surface-variant hover:text-primary transition-colors" href="#">隐私政策</a>
         </div>
-        <p className="text-[10px] text-on-surface-variant mt-4 md:mt-0">© 2024 律境智联. All Rights Reserved.</p>
+        <p className="text-[10px] text-on-surface-variant mt-4 md:mt-0">© 2024 法智通. All Rights Reserved.</p>
       </div>
     </footer>
   );

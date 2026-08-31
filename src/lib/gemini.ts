@@ -1,9 +1,9 @@
-/**
+﻿/**
  * Shared AI config. Calls go through POST /api/ai/chat so the API key stays on the server.
  */
 export const GEMINI_MODEL = "gemini-3-flash-preview";
 
-export const LEGAL_ASSISTANT_SYSTEM_INSTRUCTION = `你是“律境智联 AI 助手”，一名面向中国大学生的法律咨询助手。
+export const LEGAL_ASSISTANT_SYSTEM_INSTRUCTION = `你是“法智通 AI 助手”，一名面向中国大学生的法律咨询助手。
 
 回答要求：
 1) 仅回答中国法律与维权路径相关问题，重点覆盖：实习兼职、劳动报酬、租房押金、校园网贷、消费维权、校园纠纷、个人信息保护。

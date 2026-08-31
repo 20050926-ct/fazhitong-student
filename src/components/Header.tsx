@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+﻿import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { getAuthUser, logout } from '../lib/auth';
 
 export default function Header() {
@@ -21,7 +21,7 @@ export default function Header() {
     <header className="bg-primary shadow-md fixed top-0 w-full z-50">
       <div className="flex justify-between items-center w-full px-12 py-4 max-w-[1920px] mx-auto">
         <Link to="/" className="text-2xl font-black text-white tracking-tight flex items-center gap-2">
-          律境智联 <span className="text-sm font-normal text-white/80 ml-2">| 校园法律服务</span>
+          法智通 <span className="text-sm font-normal text-white/80 ml-2">| 校园法律服务</span>
         </Link>
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {

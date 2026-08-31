@@ -1,9 +1,9 @@
-/**
+﻿/**
  * 法律咨询相关板块的本地固定话术（不调用大模型）。
  * 导出 buildFixedQuestionsOnlyMarkdown 供导出 Word（仅固定问题列表）。
  */
 
-export const AI_CHAT_INTRO = `你好！我是律境智联 AI 助手。`;
+export const AI_CHAT_INTRO = `你好！我是法智通 AI 助手。`;
 
 /** 发送后等待的毫秒区间：模拟整理思路，避免固定时长过于机械 */
 export function aiThinkingDelayMs(): number {
@@ -348,7 +348,7 @@ export function buildAiAgentReply(agent: AgentRole, question: string): string {
 /** 导出 Word 用：只列各入口固定问题，不含回答正文 */
 export function buildFixedQuestionsOnlyMarkdown(): string {
   const lines: string[] = [];
-  lines.push('# 律境智联 · 各板块固定问题一览');
+  lines.push('# 法智通 · 各板块固定问题一览');
   lines.push('');
   lines.push('（仅汇总页面上可点的固定问题；用户另可在输入框自由提问。）');
   lines.push('');

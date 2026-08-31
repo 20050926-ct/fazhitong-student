@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search, MessageSquare, ShieldCheck, FileText } from 'lucide-react';
 
@@ -8,7 +8,7 @@ export default function Hero() {
   const [question, setQuestion] = useState('');
   const notices = [
     {
-      title: '律境智联平台 3D 游戏正在公测',
+      title: '法智通平台 3D 游戏正在公测',
       desc: '沉浸式互动普法玩法已上线，欢迎大家抢先体验、反馈建议。',
     },
     {
